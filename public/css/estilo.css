@@ -1,0 +1,21 @@
+.boder-nav {
+	border-bottom: #2D5394 solid 2px;
+}
+
+.logo {
+	height: 40px;
+}
+
+.icon {
+	margin-right: 5px;
+}
+
+.colorBar {
+	background: #2F5093;
+	color: #ffffff;
+}
+
+.btnAdd {
+	background: #2F5093;
+	color: #ffffff;
+}

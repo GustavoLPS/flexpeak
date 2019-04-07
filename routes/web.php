@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+#####################  Formulários de Cadastro #####################
+Route::get('/cursos/cadastrar','CursoController@create');
+Route::get('/professores/cadastrar','ProfessorController@create');
+Route::get('/alunos/cadastrar','AlunoController@create');
+
+#####################  Resources #####################
+Route::resource('/cursos','CursoController');
+Route::resource('/professores','ProfessorController');
+Route::resource('/alunos','AlunoController');
+Route::resource('/','AlunoController');
