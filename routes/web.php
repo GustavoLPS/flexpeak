@@ -11,13 +11,16 @@
 |
 */
 
+#####################  Store #######################################
+Route::post('/api/alunos/store','AlunoController@store');
+Route::post('/api/cursos/store','CursoController@store');
+Route::post('/api/professores/store','ProfessorController@store');
 #####################  Formulários de Cadastro #####################
+Route::get('/alunos/cadastrar','AlunoController@create');
 Route::get('/cursos/cadastrar','CursoController@create');
 Route::get('/professores/cadastrar','ProfessorController@create');
-Route::get('/alunos/cadastrar','AlunoController@create');
-
-#####################  Resources #####################
+#####################  Resources ##################################
+Route::resource('/alunos','AlunoController');
 Route::resource('/cursos','CursoController');
 Route::resource('/professores','ProfessorController');
-Route::resource('/alunos','AlunoController');
 Route::resource('/','AlunoController');

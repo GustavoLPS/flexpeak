@@ -5,7 +5,7 @@
 	<div class="card-body">
         <div class="row btn-add mb-3">
             <div class="col-md-12">
-                <a href="/cursos/cadastrar" class="btn btnAdd"><i class="fas fa-plus-circle"></i> Cadastrar</a>
+                <a href="{{url('/cursos/cadastrar')}}" class="btn btnAdd"><i class="fas fa-plus-circle"></i> Cadastrar</a>
             </div>
         </div>
 		<table class="table table-striped mt-3" id="cursos">
@@ -23,9 +23,8 @@
 					<td>{{$curso->nome_cursos}}</td>
 					<td>{{$curso->id_professores}}</td>
 					<td>
-                        <a href=""><button class="btn btn-light"><i class="fas fa-info-circle"></i></button></a>
-                        <a href=""><button class="btn btn-light"><i class="fas fa-edit"></i></button></a>
-                        <a href=""><button class="btn btn-light"><i class="fas fa-trash-alt"></i></i></button></a>               
+                        <a href=""><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
+                        <a href=""><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></i></button></a>               
                     </td>
 				</tr>
                 @endforeach

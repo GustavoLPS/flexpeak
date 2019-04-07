@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Aluno;
 use App\Models\Curso;
+use Datetime;
 
 class AlunoController extends Controller
 {
@@ -36,7 +37,8 @@ class AlunoController extends Controller
      */
     public function create()
     {
-        return view('alunos.cadastrar');
+        $cursos = $this->curso->all();
+        return view('alunos.cadastrar',compact('cursos'));
     }
 
     /**
@@ -47,7 +49,33 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->except('_token');
+
+        $data = Datetime::createFromFormat('d/m/Y',$request->input('nascimento'));
+
+        $inserir = $this->aluno->create([
+            'nome_alunos' => $request->input('nome'),
+            'data_nascimento' => $data->format('Y-m-d'),
+            'logradouro' => $request->input('logradouro'),
+            'numero' => $request->input('numero'),
+            'complemento' => $request->input('complemento'),
+            'bairro' => $request->input('bairro'),
+            'cidade' => $request->input('cidade'),
+            'cidade_1' => $request->input('cidade'),
+            'estado' => $request->input('estado'),
+            'cep' => $request->input('cep'),
+            'id_cursos' => $request->input('curso')
+        ]);
+
+        $cursos = $this->curso->all();
+
+        if($inserir) {
+            $return = 'success';
+            return view('alunos.cadastrar',compact('return','cursos'));
+        } else {
+            $return = "error";
+            return view('alunos.cadastrar',compact('return','cursos'));
+        }
     }
 
     /**

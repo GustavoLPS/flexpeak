@@ -36,7 +36,8 @@ class CursoController extends Controller
      */
     public function create()
     {
-        return view('cursos.cadastrar');
+        $professores = $this->professor->all();
+        return view('cursos.cadastrar',compact('professores'));
     }
 
     /**
@@ -47,7 +48,21 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->except('_token');
+        $inserir = $this->curso->create([
+            'nome_cursos' => $request->input('nome'),
+            'id_professores' => $request->input('professor'),
+        ]);
+
+        $professores = $this->professor->all();
+
+        if($inserir) {
+            $return = 'success';
+            return view('cursos.cadastrar',compact('return','professores'));
+        } else {
+            $return = 'error';
+            return view('cursos.cadastrar',compact('return','professores'));
+        }
     }
 
     /**

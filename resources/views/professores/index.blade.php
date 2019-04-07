@@ -5,7 +5,7 @@
 	<div class="card-body">
 		<div class="row btn-add mb-3">
             <div class="col-md-12">
-                <a href="/professores/cadastrar" class="btn btnAdd"><i class="fas fa-user-plus"></i> Cadastrar</a>
+                <a href="{{url('/professores/cadastrar')}}" class="btn btnAdd"><i class="fas fa-user-plus"></i> Cadastrar</a>
             </div>
         </div>
 		<table class="table table-striped mt-3" id="professores">
@@ -25,9 +25,8 @@
                     <td>{{$professor->nome_professores}}</td>
 					<td>{{$data->format('d/m/Y')}}</td>
 					<td>
-                        <a href=""><button class="btn btn-light"><i class="fas fa-info-circle"></i></button></a>
-                        <a href=""><button class="btn btn-light"><i class="fas fa-user-edit"></i></button></a>
-                        <a href=""><button class="btn btn-light"><i class="fas fa-user-times"></i></button></a>
+                        <a href=""><button class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a>
+                        <a href=""><button class="btn btn-danger"><i class="fas fa-user-times"></i></button></a>
                     </td>
 				</tr>
                 @endforeach

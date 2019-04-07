@@ -19,6 +19,5 @@ class Aluno extends Model
  		'estado',
  		'cep',
  		'id_cursos'
-
  	];
 }

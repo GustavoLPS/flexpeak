@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Professores;
+use Datetime;
 
 class ProfessorController extends Controller
 {
@@ -43,7 +44,19 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->except('_token');
+
+        $data = Datetime::createFromFormat('d/m/Y',$request->input('nascimento'));
+
+        $inserir = $this->professor->create([
+            'nome_professores' => $request->input('nome'),
+            'data_nascimento_professores' => $data->format('Y-m-d')
+        ]);
+
+        if($inserir) {
+            $return = 'success';
+            return view('professores.cadastrar',compact('return'));
+        }
     }
 
     /**
