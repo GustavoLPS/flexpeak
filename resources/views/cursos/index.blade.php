@@ -5,7 +5,7 @@
 	<div class="card-body">
         <div class="row btn-add mb-3">
             <div class="col-md-12">
-                <a href="{{url('/cursos/cadastrar')}}" class="btn btnAdd"><i class="fas fa-plus-circle"></i> Cadastrar</a>
+                <a href="/cursos/cadastrar" class="btn btnAdd"><i class="fas fa-plus-circle"></i> Cadastrar</a>
             </div>
         </div>
 		<table class="table table-striped mt-3" id="cursos">
