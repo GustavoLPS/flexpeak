@@ -13,17 +13,23 @@
 				<th>ID</th>
 				<th>Nome</th>
 				<th>Nascimento</th>
+                <th>Criado em</th>
 				<th>Ações</th>
 			</thead>
 			<tbody>
                 <?php $professores = json_decode($professores); ?>
                 @foreach($professores as $professor)
                 <?php 
+                    $dt = new DateTime($professor->created_at);
+                    $dataC = $dt->format('d/m/Y');
+                ?>
+                <?php 
                 $data = Datetime::createFromFormat('Y-m-d',$professor->data_nascimento_professores);?>
 				<tr>
 					<td>{{$professor->id_professores}}</td>
                     <td>{{$professor->nome_professores}}</td>
 					<td>{{$data->format('d/m/Y')}}</td>
+                    <td>{{$dataC}}</td>
 					<td>
                         <a href="{{url('/professores/editar/'.$professor->id_professores)}}"><button class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a>
                         <a href="{{url('/api/professores/destroy/'.$professor->id_professores)}}"><button class="btn btn-danger" onclick="return confirm('Deseja mesmo deletar esse professor?')"><i class="fas fa-user-times"></i></button></a>

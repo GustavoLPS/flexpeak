@@ -13,6 +13,7 @@
 				<th>ID</th>
 				<th>Nome</th>
 				<th>Professor</th>
+                <th>Criado em</th>
 				<th>Ações</th>
 			</thead>
 			<tbody>
@@ -22,11 +23,16 @@
                         @if ($curso->id_professores == $professor->id_professores)
                             <?php $nome_professor = $professor->nome_professores ?>
                         @endif
+                        <?php 
+                            $dt = new DateTime($professor->created_at);
+                            $dataC = $dt->format('d/m/Y');
+                        ?>
                     @endforeach
 				<tr>
 					<td>{{$curso->id_cursos}}</td>
 					<td>{{$curso->nome_cursos}}</td>
 					<td>{{$nome_professor}}</td>
+                    <td>{{$dataC}}</td>
 					<td>
                         <a href="{{url('/cursos/editar/'.$curso->id_cursos)}}"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
                         <a href="{{url('/api/cursos/destroy/'.$curso->id_cursos)}}"><button class="btn btn-danger" onclick="return confirm('Deseja mesmo deletar esse curso?')"><i class="fas fa-user-times"></i></button></a>               
