@@ -5,7 +5,7 @@
 	<div class="card-body">
 		<div class="row btn-add mb-3">
             <div class="col-md-12">
-                <a href="/alunos/cadastrar" class="btn btnAdd"><i class="fas fa-user-plus"></i> Cadastrar</a>
+                <a href="{{url('/alunos/cadastrar')}}" class="btn btnAdd"><i class="fas fa-user-plus"></i> Cadastrar</a>
             </div>
         </div>
 		<table class="table table-striped" id="alunos">
@@ -34,9 +34,9 @@
 					<td>{{$data->format('d/m/Y')}}</td>
 					<td>{{$nome_curso}}</td>
 					<td>
-                        <a href=""><button class="btn btn-info"><i class="fas fa-info-circle"></i></button></a>
-                        <a href=""><button class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a>
-                        <a href=""><button class="btn btn-danger"><i class="fas fa-user-times"></i></button></a>
+                        <a href="{{ url('/alunos/detalhe/'.$aluno->id_alunos) }}"><button class="btn btn-info"><i class="fas fa-info-circle"></i></button></a>
+                        <a href="{{ url('/alunos/editar/'.$aluno->id_alunos) }}"><button class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a>
+                        <a href="{{url('/api/alunos/destroy/'.$aluno->id_alunos)}}"><button class="btn btn-danger" onclick="return confirm('Deseja mesmo deletar esse aluno?')"><i class="fas fa-user-times"></i></button></a>
                     </td>
 				</tr>
                 @endforeach

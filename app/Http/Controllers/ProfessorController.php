@@ -78,7 +78,9 @@ class ProfessorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $professor = $this->professor->find($id);
+        $data = Datetime::createFromFormat('Y-m-d',$professor->data_nascimento_professores);
+        return view('professores.editar',compact('professor','data'));
     }
 
     /**
@@ -88,9 +90,27 @@ class ProfessorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->except('_token');
+
+        $professor = $this->professor->find($request->id_professores);
+        $data = Datetime::createFromFormat('d/m/Y',$request->nascimento);
+        $update = $professor->update([
+            'nome_professores' => $request->nome,
+            'data_nascimento_professores' => $data->format('Y-m-d')
+        ]);
+
+        if($update) {
+            $professor = $this->professor->find($request->id_professores);
+            $data = Datetime::createFromFormat('Y-m-d',$professor->data_nascimento_professores);
+            $return = 'success';
+            return view('professores.editar',compact('return','professor','data'));
+        } else {
+            $return = 'error';
+            $data = $request->nascimento;
+            return view('professores.editar',compact('return','professor','data'));
+        }
     }
 
     /**
@@ -101,6 +121,15 @@ class ProfessorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $professor = $this->professor->find($id);
+        $delete = $professor->delete();
+
+        $professores = $this->professor->all();
+        
+        if($delete){
+            return view('professores.index',compact('professores'));
+        } else {
+            return view('professores.index',compact('professores'));
+        }
     }
 }

@@ -84,7 +84,9 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $curso = $this->curso->find($id);
+        $professores = $this->professor->all();
+        return view('cursos.editar',compact('curso','professores'));
     }
 
     /**
@@ -94,9 +96,26 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->except('_token');
+        $curso = $this->curso->find($request->id_cursos);
+        $update = $curso->update([
+            'nome_cursos' => $request->nome,
+            'id_professores' => $request->professor
+        ]);
+
+        $professores = $this->professor->all();
+
+        if($update) {
+            $return = 'success';
+            $curso = $this->curso->find($request->id_cursos);
+            return view('cursos.editar',compact('return','curso','professores'));
+        } else {
+            $return = 'error';
+            $curso = $this->curso->find($request->id_cursos);
+            return view('cursos.editar',compact('return','curso','professores'));
+        }
     }
 
     /**
@@ -107,6 +126,16 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = $this->curso->find($id);
+        $delete = $curso->delete();
+
+        $cursos = $this->curso->all();
+        $professores = $this->professor->all();
+
+        if($delete) {
+            return view('cursos.index',compact('cursos','professores'));
+        } else {
+            return view('cursos.index',compact('cursos','professores'));
+        }
     }
 }

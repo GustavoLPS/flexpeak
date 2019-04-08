@@ -61,7 +61,6 @@ class AlunoController extends Controller
             'complemento' => $request->input('complemento'),
             'bairro' => $request->input('bairro'),
             'cidade' => $request->input('cidade'),
-            'cidade_1' => $request->input('cidade'),
             'estado' => $request->input('estado'),
             'cep' => $request->input('cep'),
             'id_cursos' => $request->input('curso')
@@ -86,7 +85,12 @@ class AlunoController extends Controller
      */
     public function show($id)
     {
-        //
+        $aluno = $this->aluno->find($id);   
+        $data = Datetime::createFromFormat('Y-m-d',$aluno->data_nascimento);
+        $dt = new DateTime($aluno->created_at);
+        $dataC = $dt->format('d/m/Y');
+        $cursos = $this->curso->all();
+        return view('alunos.detalhe',compact('aluno','cursos','data','dataC'));
     }
 
     /**
@@ -97,7 +101,10 @@ class AlunoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $aluno = $this->aluno->find($id);
+        $data = Datetime::createFromFormat('Y-m-d',$aluno->data_nascimento);
+        $cursos = $this->curso->all();
+        return view('alunos.editar',compact('aluno','cursos','data'));
     }
 
     /**
@@ -107,9 +114,39 @@ class AlunoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $request->except('_token');
+
+        $aluno = $this->aluno->find($request->id_alunos);
+        $data = Datetime::createFromFormat('d/m/Y',$request->nascimento);
+        $update = $aluno->update([
+            'nome_alunos' => $request->nome,
+            'data_nascimento' => $data->format('Y-m-d'),
+            'logradouro' => $request->logradouro,
+            'numero' => $request->numero,
+            'complemento' => $request->complemento,
+            'bairro' => $request->bairro,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'cep' => $request->cep,
+            'id_cursos' => $request->curso
+        ]);
+
+        $cursos = $this->curso->all();
+
+        if($update) {
+            $return = 'success';
+            $aluno = $this->aluno->find($request->id_alunos);
+            $data = Datetime::createFromFormat('Y-m-d',$aluno->data_nascimento);
+            return view('alunos.editar',compact('return','aluno','cursos','data'));
+        } else {
+            $return = 'error';
+            $aluno = $this->aluno->find($request->id_alunos);
+            $data = Datetime::createFromFormat('Y-m-d',$aluno->data_nascimento);
+            return view('alunos.editar',compact('return','aluno','cursos','data'));
+        }
     }
 
     /**
@@ -120,6 +157,16 @@ class AlunoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $aluno = $this->aluno->find($id);
+        $delete = $aluno->delete();
+
+        $alunos = $this->aluno->all();
+        $cursos = $this->curso->all();
+
+        if($delete) {
+            return view('alunos.index',compact('alunos','cursos'));
+        } else {
+            return view('alunos.index',compact('alunos','cursos'));
+        }
     }
 }

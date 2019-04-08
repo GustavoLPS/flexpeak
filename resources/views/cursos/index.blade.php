@@ -5,7 +5,7 @@
 	<div class="card-body">
         <div class="row btn-add mb-3">
             <div class="col-md-12">
-                <a href="/cursos/cadastrar" class="btn btnAdd"><i class="fas fa-plus-circle"></i> Cadastrar</a>
+                <a href="{{url('/cursos/cadastrar')}}" class="btn btnAdd"><i class="fas fa-plus-circle"></i> Cadastrar</a>
             </div>
         </div>
 		<table class="table table-striped mt-3" id="cursos">
@@ -18,13 +18,18 @@
 			<tbody>
                 <?php $cursos = json_decode($cursos); ?>
                 @foreach($cursos as $curso)
+                    @foreach($professores as $professor)
+                        @if ($curso->id_professores == $professor->id_professores)
+                            <?php $nome_professor = $professor->nome_professores ?>
+                        @endif
+                    @endforeach
 				<tr>
 					<td>{{$curso->id_cursos}}</td>
 					<td>{{$curso->nome_cursos}}</td>
-					<td>{{$curso->id_professores}}</td>
+					<td>{{$nome_professor}}</td>
 					<td>
-                        <a href=""><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
-                        <a href=""><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></i></button></a>               
+                        <a href="{{url('/cursos/editar/'.$curso->id_cursos)}}"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
+                        <a href="{{url('/api/cursos/destroy/'.$curso->id_cursos)}}"><button class="btn btn-danger" onclick="return confirm('Deseja mesmo deletar esse curso?')"><i class="fas fa-user-times"></i></button></a>               
                     </td>
 				</tr>
                 @endforeach
