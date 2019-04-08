@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Aluno;
 use App\Models\Curso;
 use App\Models\Professores;
+use PDF;
 
 class RelatorioController extends Controller
 {
@@ -35,7 +36,7 @@ class RelatorioController extends Controller
                     ->orderBy('nome_alunos','asc')
                     ->get();
 
-        return \PDF::loadView('relatorio.index',compact('alunos'))->setPaper('a4','landscape')->download('relatorio.pdf');
+        return PDF::loadView('relatorio.index',compact('alunos'))->setPaper('a4','landscape')->download('relatorio.pdf');
         //return view('relatorio.index',compact('alunos','cursos','professores'));
     }
 
