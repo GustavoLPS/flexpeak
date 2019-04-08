@@ -28,7 +28,7 @@
 		        <a id="btnAlunos" class="nav-link" href="/alunos'" class="btn"><i class="fas fa-user-graduate icon"></i>Alunos</a>
 		      </li>
 		      <li class="nav-item">
-		        <a id="btnRelatorio" class="nav-link" href="/relatorio'" class="btn"><i class="fas fa-list"></i>Relatorio</a>
+		        <a id="btnRelatorio" class="nav-link" href="/relatorio" class="btn"><i class="fas fa-list"></i>Relatorio</a>
 		      </li>
 		    </ul>
 	  </div>
