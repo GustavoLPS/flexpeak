@@ -19,16 +19,16 @@
 	  <div class="collapse navbar-collapse" id="navbarNav">
 		    <ul class="navbar-nav">
 		      <li class="nav-item">
-		        <a id="btnProfessores" class="nav-link" href="/professores" class="btn"><i class="fas fa-chalkboard-teacher icon"></i>Professores</a>
+		        <a id="btnProfessores" class="nav-link" href="{{url('/professores')}}" class="btn"><i class="fas fa-chalkboard-teacher icon"></i>Professores</a>
 		      </li>
 		      <li class="nav-item">
-		        <a id="btnCursos" class="nav-link" href="/cursos" class="btn"><i class="fas fa-graduation-cap icon"></i>Cursos</a>
+		        <a id="btnCursos" class="nav-link" href="{{url('/cursos')}}" class="btn"><i class="fas fa-graduation-cap icon"></i>Cursos</a>
 		      </li>
 		      <li class="nav-item">
-		        <a id="btnAlunos" class="nav-link" href="/alunos'" class="btn"><i class="fas fa-user-graduate icon"></i>Alunos</a>
+		        <a id="btnAlunos" class="nav-link" href="{{url('/alunos')}}" class="btn"><i class="fas fa-user-graduate icon"></i>Alunos</a>
 		      </li>
 		      <li class="nav-item">
-		        <a id="btnRelatorio" class="nav-link" href="/relatorio" class="btn"><i class="fas fa-list"></i>Relatorio</a>
+		        <a id="btnRelatorio" class="nav-link" href="{{url('/relatorio')}}" class="btn"><i class="fas fa-list"></i>Relatorio</a>
 		      </li>
 		    </ul>
 	  </div>
