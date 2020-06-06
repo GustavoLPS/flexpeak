@@ -14,7 +14,7 @@ class AddForeignKeysToAlunosTable extends Migration {
 	{
 		Schema::table('alunos', function(Blueprint $table)
 		{
-			$table->foreign('id_cursos', 'cursos_alunos_fk')->references('id_cursos')->on('cursos')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('curso_id', 'alunos_cursos_fk')->references('id')->on('cursos')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddForeignKeysToAlunosTable extends Migration {
 	{
 		Schema::table('alunos', function(Blueprint $table)
 		{
-			$table->dropForeign('cursos_alunos_fk');
+			$table->dropForeign('alunos_cursos_fk');
 		});
 	}
 

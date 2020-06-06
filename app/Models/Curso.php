@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Curso extends Model
 {
-    protected $primaryKey = 'id_cursos';
+    protected $guarded = [];
+    protected $dates = ['updated_at', 'created_at'];
 
-    protected $fillable = [
-    	'nome_cursos',
-    	'id_professores'
-    ];
+    public function aluno()
+    {
+        return $this->belongsTo(Aluno::class);
+    }
+
+    public function professor()
+    {
+        return $this->belongsTo(Professor::class);
+    }
 }

@@ -5,7 +5,9 @@ namespace App\Services;
 
 
 use App\Models\Aluno;
+use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 class AlunoService
 {
@@ -49,7 +51,7 @@ class AlunoService
     {
         try {
             return $aluno->delete();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             return false;
         }
@@ -61,6 +63,6 @@ class AlunoService
      */
     public static function getAll() :Collection
     {
-        return Aluno::getAll();
+        return Aluno::all();
     }
 }

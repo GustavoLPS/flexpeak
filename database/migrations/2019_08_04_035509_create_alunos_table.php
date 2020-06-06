@@ -14,8 +14,8 @@ class CreateAlunosTable extends Migration {
 	{
 		Schema::create('alunos', function(Blueprint $table)
 		{
-			$table->integer('id_alunos', true);
-			$table->string('nome_alunos');
+			$table->integer('id', true);
+			$table->string('nome');
 			$table->date('data_nascimento');
 			$table->string('logradouro');
 			$table->integer('numero');
@@ -25,7 +25,7 @@ class CreateAlunosTable extends Migration {
 			$table->string('estado');
 			$table->string('cep');
 			$table->timestamps();
-			$table->integer('id_cursos');
+			$table->integer('curso_id');
 		});
 	}
 

@@ -6,18 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aluno extends Model
 {
-    protected $primaryKey = 'id_alunos';
+	protected $guarded = [];
+	protected $dates = ['updated_at', 'created_at'];
 
- 	protected $fillable = [
- 		'nome_alunos',
- 		'data_nascimento',
- 		'logradouro',
- 		'numero',
- 		'complemento',
- 		'bairro',
- 		'cidade',
- 		'estado',
- 		'cep',
- 		'id_cursos'
- 	];
+	public function curso()
+	{
+		return $this->hasMany(Curso::class);
+	}
+
 }
